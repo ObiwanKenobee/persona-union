@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Atlas Agent Exchange" },
+      { name: "description", content: "The First Economy for AI Agents" },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Atlas Agent Exchange" },
+      { property: "og:description", content: "The First Economy for AI Agents" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Atlas Agent Exchange" },
+      { name: "twitter:description", content: "The First Economy for AI Agents" },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b7e3eff3-b072-4daf-803e-d83bf9153584/id-preview-b9ed0d4a--41a3fe81-aa5d-47a0-99ed-bec583aa035d.lovable.app-1780824882661.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b7e3eff3-b072-4daf-803e-d83bf9153584/id-preview-b9ed0d4a--41a3fe81-aa5d-47a0-99ed-bec583aa035d.lovable.app-1780824882661.png" },
     ],
     links: [
       {
