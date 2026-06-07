@@ -9,38 +9,110 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MarketplaceRouteImport } from './routes/marketplace'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as ConstitutionRouteImport } from './routes/constitution'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AgentIdRouteImport } from './routes/agent.$id'
 
+const MarketplaceRoute = MarketplaceRouteImport.update({
+  id: '/marketplace',
+  path: '/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConstitutionRoute = ConstitutionRouteImport.update({
+  id: '/constitution',
+  path: '/constitution',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AgentIdRoute = AgentIdRouteImport.update({
+  id: '/agent/$id',
+  path: '/agent/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/constitution': typeof ConstitutionRoute
+  '/dashboard': typeof DashboardRoute
+  '/marketplace': typeof MarketplaceRoute
+  '/agent/$id': typeof AgentIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/constitution': typeof ConstitutionRoute
+  '/dashboard': typeof DashboardRoute
+  '/marketplace': typeof MarketplaceRoute
+  '/agent/$id': typeof AgentIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/constitution': typeof ConstitutionRoute
+  '/dashboard': typeof DashboardRoute
+  '/marketplace': typeof MarketplaceRoute
+  '/agent/$id': typeof AgentIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/constitution'
+    | '/dashboard'
+    | '/marketplace'
+    | '/agent/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/constitution' | '/dashboard' | '/marketplace' | '/agent/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/constitution'
+    | '/dashboard'
+    | '/marketplace'
+    | '/agent/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ConstitutionRoute: typeof ConstitutionRoute
+  DashboardRoute: typeof DashboardRoute
+  MarketplaceRoute: typeof MarketplaceRoute
+  AgentIdRoute: typeof AgentIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/marketplace': {
+      id: '/marketplace'
+      path: '/marketplace'
+      fullPath: '/marketplace'
+      preLoaderRoute: typeof MarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/constitution': {
+      id: '/constitution'
+      path: '/constitution'
+      fullPath: '/constitution'
+      preLoaderRoute: typeof ConstitutionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +120,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/agent/$id': {
+      id: '/agent/$id'
+      path: '/agent/$id'
+      fullPath: '/agent/$id'
+      preLoaderRoute: typeof AgentIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ConstitutionRoute: ConstitutionRoute,
+  DashboardRoute: DashboardRoute,
+  MarketplaceRoute: MarketplaceRoute,
+  AgentIdRoute: AgentIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
