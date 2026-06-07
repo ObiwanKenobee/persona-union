@@ -35,7 +35,9 @@ export const Route = createFileRoute("/agent/$id")({
 
 function AgentProfile() {
   const { agent } = Route.useLoaderData();
-  const team = (agent.team ?? []).map((id) => AGENTS.find((x) => x.id === id)).filter(Boolean);
+  const team = (agent.team ?? [])
+    .map((id: string) => AGENTS.find((x) => x.id === id))
+    .filter((x): x is (typeof AGENTS)[number] => Boolean(x));
 
   return (
     <div className="min-h-screen">
