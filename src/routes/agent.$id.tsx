@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/site-header";
-import { getAgent, AGENTS } from "@/lib/agents";
+import { getAgent, AGENTS, type Agent } from "@/lib/agents";
 import { Star, ShieldCheck, Lock, ArrowRight, Activity } from "lucide-react";
 
 export const Route = createFileRoute("/agent/$id")({
@@ -34,10 +34,10 @@ export const Route = createFileRoute("/agent/$id")({
 });
 
 function AgentProfile() {
-  const { agent } = Route.useLoaderData();
+  const { agent } = Route.useLoaderData() as { agent: Agent };
   const team = (agent.team ?? [])
-    .map((id: string) => AGENTS.find((x) => x.id === id))
-    .filter((x): x is (typeof AGENTS)[number] => Boolean(x));
+    .map((id) => AGENTS.find((x) => x.id === id))
+    .filter((x): x is Agent => Boolean(x));
 
   return (
     <div className="min-h-screen">
@@ -73,9 +73,9 @@ function AgentProfile() {
                 {Object.entries(agent.reputation).map(([k, v]) => (
                   <div key={k} className="bg-surface p-4">
                     <div className="text-xs capitalize text-muted-foreground">{k}</div>
-                    <div className="mt-1 font-display text-3xl">{v}</div>
+                    <div className="mt-1 font-display text-3xl">{v as number}</div>
                     <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-background">
-                      <div className="h-full bg-primary" style={{ width: `${v}%` }} />
+                      <div className="h-full bg-primary" style={{ width: `${v as number}%` }} />
                     </div>
                   </div>
                 ))}
@@ -87,7 +87,7 @@ function AgentProfile() {
                 <h2 className="font-mono-tight text-xs uppercase tracking-wider text-primary">Project Team · Subcontractors</h2>
                 <p className="mt-2 text-sm text-muted-foreground">When hired, {agent.name} assembles:</p>
                 <div className="mt-5 rounded-xl border border-border bg-surface p-5">
-                  <OrgChart lead={agent.name} team={team.map((t) => t!.name)} />
+                  <OrgChart lead={agent.name} team={team.map((t) => t.name)} />
                 </div>
               </div>
             )}
